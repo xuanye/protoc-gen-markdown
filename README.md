@@ -1,4 +1,4 @@
-# protoc-gen-dotbpe
+# protoc-gen-markdown
 基于nodejs的 Google Protobuf 代码生成工具，用于生成DotBPE的样板代码，
 
 
