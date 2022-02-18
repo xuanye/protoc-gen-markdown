@@ -1,0 +1,46 @@
+{{service.serviceName}}
+--------------------------
+	{{service.description}}
+	
+## 1. Service Definition
+
+{{each service.methodList method index}}
+### 1.{{index+1}} {{service.serviceName}}.{{method.methodName}} 
+> {{method.description}}  
+
+
+*公共参数不显示，关于公共参数可参考首页说明*
+
+#### 1.{{index+1}}.1 Request
+
+{{if refMessages[method.inputType]}}
+[{{method.inputType}}]  {{refMessages[method.inputType].description}}
+
+|  字段名  |  类型  |  注释  |   JSON Name  |
+| ------------ | ------------ | ------------ | ------------ |{{each refMessages[method.inputType].fieldList field index}}{{if field.fieldType==0}}
+|  {{field.name}}  |  {{field | getFieldTypeName}}  |  {{field.description}}  |   {{field.jsonName}}   |{{/if}}{{/each}}
+{{/if}}
+
+
+#### 1.{{index+1}}.2 Response
+
+{{if refMessages[method.outputType]}}
+
+[{{method.outputType}}]  {{refMessages[method.outputType].description}}
+
+|  字段名  |  类型  |  注释  |   JSON Name  |
+| ------------ | ------------ | ------------ | ------------ |{{each refMessages[method.outputType].fieldList field index}}{{if field.fieldType==0}}
+|  {{field.name}}  |  {{field | getFieldTypeName}}  |  {{field.description}}  |   {{field.jsonName}}   |{{/if}}{{/each}}
+{{/if}}
+{{/each}}
+
+
+## 2. Message Definition
+{{each refMessages message }}
+### <span id="{{message.name.toLowerCase()}}">{{message.name}}</span> 
+> {{message.description}}  
+
+| 字段名     | 类型   |  注释  |  JSON Name  |
+| --------   | -----  | ----  | ----  |{{each message.fieldList field index}}
+|  {{field.name}}  |  {{field | getFieldTypeName}}  |  {{field.description}}  |   {{field.jsonName}}   |{{/each}}
+{{/each}}
